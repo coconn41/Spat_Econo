@@ -41,7 +41,33 @@ Washington_State = USA_States %>%
 sf_salesdat = KingsCountyHomeSales_1_ %>%
   st_as_sf(.,coords=c('longitude','latitude'))
 
-tm_shape(Washington_Census_tracts,bbox = st_bbox(sf_salesdat))+
-  tm_borders(col = 'black')+
-tm_shape(sf_salesdat)+
-  tm_dots(alpha=.3)
+#Viz all dots
+# tm_shape(Washington_Census_tracts,
+#          bbox = st_bbox(sf_salesdat))+
+#   tm_borders(col='black')+
+# tm_shape(sf_salesdat)+
+#   tm_dots(alpha=.5)
+# 
+# 
+# #Viz population
+# names(Washington_Census_tracts)[5]='id'
+# tm_shape(sf_salesdat %>%
+#            st_join(.,Washington_Census_tracts,by='id'))+
+#   tm_polygons(col='pop_estimate')
+
+#Viz population density
+# tract_est=KingsCountyHomeSales_1_ %>%
+#   group_by(census_tract) %>%
+#   summarise(population=max(pop_estimate))
+# names(tract_est)[1]='id'
+# tract_est$id=as.character(tract_est$id)
+# Washington_Census_tracts$area=st_area(Washington_Census_tracts)
+# attributes(Washington_Census_tracts$area)=NULL
+# Wash_cens = Washington_Census_tracts %>%
+#   left_join(.,tract_est,by='id') %>%
+#   mutate(Density = population/area)
+# tmap_mode(mode='view')
+# tm_shape(Wash_cens,bbox=st_bbox(sf_salesdat))+
+#   tm_polygons(col='Density',
+#               breaks=c(0.001,0.002,0.003,0.004,0.005,0.01,1))
+
